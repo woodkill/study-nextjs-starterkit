@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/site-config";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
@@ -17,10 +19,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+/** SITE_CONFIG 중앙 설정으로부터 메타데이터 생성 */
 export const metadata: Metadata = {
-  title: "Starter Kit",
-  description:
-    "Next.js, Tailwind CSS, shadcn/ui로 구축된 모던 웹 스타터킷",
+  title: SITE_CONFIG.name,
+  description: SITE_CONFIG.description,
 };
 
 export default function RootLayout({
@@ -32,9 +34,9 @@ export default function RootLayout({
     <html
       lang="ko"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn(geistSans.variable, geistMono.variable, "h-full antialiased")}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

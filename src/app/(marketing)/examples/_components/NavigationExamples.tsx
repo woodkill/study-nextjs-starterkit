@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Tabs,
@@ -11,6 +7,7 @@ import {
 } from "@/components/ui/tabs";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -35,8 +32,6 @@ import {
  * 네비게이션/오버레이 컴포넌트 예제 섹션 (Tabs, Sheet, Tooltip, DropdownMenu)
  */
 export function NavigationExamples() {
-  const [sheetOpen, setSheetOpen] = useState(false);
-
   return (
     <section>
       <h2 className="text-2xl font-bold tracking-tight">
@@ -103,8 +98,8 @@ export function NavigationExamples() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Sheet */}
-        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        {/* Sheet — 외부 상태 없이 SheetClose로 닫기 처리 */}
+        <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline">Sheet 열기</Button>
           </SheetTrigger>
@@ -120,9 +115,9 @@ export function NavigationExamples() {
               <p className="text-sm text-muted-foreground">
                 Sheet 내부에 원하는 콘텐츠를 배치할 수 있습니다.
               </p>
-              <Button className="mt-4" onClick={() => setSheetOpen(false)}>
-                닫기
-              </Button>
+              <SheetClose asChild>
+                <Button className="mt-4">닫기</Button>
+              </SheetClose>
             </div>
           </SheetContent>
         </Sheet>
